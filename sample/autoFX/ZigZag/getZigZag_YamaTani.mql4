@@ -1,0 +1,50 @@
+//+------------------------------------------------------------------+
+//|【関数】ZigZagの直近の山・谷取得                                  |
+//|                                                                  |
+//|【引数】 IN OUT  引数名             説明                          |
+//|        --------------------------------------------------------- |
+//|         ○      aZIGZAG            インジケーターファイル名      |
+//|         ○      tf                 時間足                        |
+//|         ○      aExtDepth          インジケーター引数１          |
+//|         ○      aExtDeviation      インジケーター引数２          |
+//|         ○      aExtBackstep       インジケーター引数３          |
+//|         ○      aMaxLoopCount      最大ループカウント            |
+//|            ○   aYama              山                            |
+//|            ○   aTani              谷                            |
+//|                                                                  |
+//|【戻値】なし                                                      |
+//|                                                                  |
+//|【備考】なし                                                      |
+//+------------------------------------------------------------------+
+void zigzagYamaTani(string aZIGZAG, int aTf, int aExtDepth, int aExtDeviation, int aExtBackstep, int aMaxLoopCount, double &aYama, double &aTani)
+{
+  bool yamaFlg = false;
+  bool taniFlg = false;
+
+  for(int i = 0; i < aMaxLoopCount; i++){
+    double zigzag  = NormalizeDouble(iCustom(NULL, aTf, aZIGZAG, aExtDepth, aExtDeviation, aExtBackstep, 0, i), Digits);
+    double zigzagH = NormalizeDouble(iCustom(NULL, aTf, aZIGZAG, aExtDepth, aExtDeviation, aExtBackstep, 1, i), Digits);
+    double zigzagL = NormalizeDouble(iCustom(NULL, aTf, aZIGZAG, aExtDepth, aExtDeviation, aExtBackstep, 2, i), Digits);
+
+    if(zigzag == 0){
+      continue;
+    }
+
+    // 最初に出現する山または谷は無視する（取得する山と谷は２本の線の頂点として構成されているものだけ）
+    if(zigzag == zigzagH){
+      if(yamaFlg || (yamaFlg == false && taniFlg)){
+        aYama = zigzag;
+      }
+      yamaFlg = true;
+    }else if(zigzag == zigzagL){
+      if(taniFlg || (taniFlg == false && yamaFlg)){
+        aTani = zigzag;
+      }
+      taniFlg = true;
+    }
+
+    if(aYama != 0.0 && aTani != 0.0){
+      break;
+    }
+  }
+}

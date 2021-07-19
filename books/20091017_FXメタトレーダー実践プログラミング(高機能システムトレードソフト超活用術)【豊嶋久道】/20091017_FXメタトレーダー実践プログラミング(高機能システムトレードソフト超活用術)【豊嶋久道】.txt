@@ -1,0 +1,16 @@
+********************************************************************************
+FXメタトレーダー実践プログラミング高機能システムトレードソフト超活用術
+著者　豊嶋久道
+
+********************************************************************************
+
+◆著者のHP
+https://toyolab-fx.amebaownd.com/
+
+◆サンプルプログラム
+https://www.panrolling.com/books/gr/gr83.html
+
+
+
+・Toyolab FX - 手ぶらで為替取引 ⇒ http://forex.toyolab.com/
+・Pan Rolling 投資の仲間たち    ⇒ http://www.panrolling.com/blog/toyoshima.html

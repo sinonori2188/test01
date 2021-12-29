@@ -1,9 +1,9 @@
-//+------------------------------------------------------------------+
+þÿ//+------------------------------------------------------------------+
 //|                                                          Ex2.mq4 |
 //|                                   Copyright (c) 2007, Toyolab FX |
 //|                                         http://forex.toyolab.com |
 //+------------------------------------------------------------------+
-#property copyright "Copyright (c) 2007, Toyolab FX"
+#property copyright "Copyrightc) 2007, Toyolab FX"
 #property link      "http://forex.toyolab.com"
 
 #property indicator_chart_window
@@ -36,9 +36,9 @@ int start()
    //Žw•W‚ÌŒvŽZ
    for(int i=limit-1; i>=0; i--)
    {
-      Buf[i] = (Close[i]+Close[i+1]+Close[i+2]+Close[i+3])/4;
+      Buf[i] =Close[i]+Close[i+1]+Close[i+2]+Close[i+3])/4;
    }
 
    return(0);
 }
-//+------------------------------------------------------------------+
+//+------------------------------------------------------------------

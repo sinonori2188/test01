@@ -1,0 +1,44 @@
+þÿ//+------------------------------------------------------------------+
+//|                                                          Ex2.mq4 |
+//|                                   Copyright (c) 2007, Toyolab FX |
+//|                                         http://forex.toyolab.com |
+//+------------------------------------------------------------------+
+#property copyright "Copyrightc) 2007, Toyolab FX"
+#property link      "http://forex.toyolab.com"
+
+#property indicator_chart_window
+#property indicator_buffers 1
+#property indicator_color1 Red       //<--ƒ‰ƒCƒ“‚ÌF‚ðŽw’è
+#property indicator_style1 STYLE_DOT //<--ƒ‰ƒCƒ“‚ÌŽí—Þ‚ðŽw’è
+
+//Žw•Wƒoƒbƒtƒ@
+double Buf[];
+
+//+------------------------------------------------------------------+
+//| ‰Šú‰»ŠÖ”                                                       |
+//+------------------------------------------------------------------+
+int init()
+{
+   //Žw•Wƒoƒbƒtƒ@‚ÌŠ„‚è“–‚Ä
+   SetIndexBuffer(0,Buf);
+
+   return(0);
+}
+
+//+------------------------------------------------------------------+
+//| Žw•Wˆ—ŠÖ”                                                     |
+//+------------------------------------------------------------------+
+int start()
+{
+   //Žw•W‚ÌŒvŽZ”ÍˆÍ
+   int limit = Bars-IndicatorCounted();
+
+   //Žw•W‚ÌŒvŽZ
+   for(int i=limit-1; i>=0; i--)
+   {
+      Buf[i] =Close[i]+Close[i+1]+Close[i+2]+Close[i+3])/4;
+   }
+
+   return(0);
+}
+//+------------------------------------------------------------------

@@ -63,20 +63,22 @@ int deinit()
 //| Custom indicator iteration function                              |
 //+------------------------------------------------------------------+
 int start()
-  {
-   int    limit=Bars-IndicatorCounted();
-  
+{
+   int  limit=Bars-IndicatorCounted();
+
    for(int i=limit-1;i>=0;i--){
       ExtMapBuffer3[i]=High[i]*(1+Factor*(High[i]-Low[i])/((High[i]+Low[i])/2));
       ExtMapBuffer4[i]=Low[i]*(1-Factor*(High[i]-Low[i])/((High[i]+Low[i])/2));
       ExtMapBuffer5[i]=(ExtMapBuffer3[i]+ExtMapBuffer4[i])/2;
    }
-  
+
    for(i=limit-1;i>=0;i--){
       ExtMapBuffer1[i]=iMAOnArray(ExtMapBuffer3,0,smPeriod,0,smMethod,i);
       ExtMapBuffer2[i]=iMAOnArray(ExtMapBuffer4,0,smPeriod,0,smMethod,i);
       ExtMapBuffer6[i]=(ExtMapBuffer1[i]+ExtMapBuffer2[i])/2;
-   }  
+   }
+
    return(0);
-  }
+
+}
 //+------------------------------------------------------------------+

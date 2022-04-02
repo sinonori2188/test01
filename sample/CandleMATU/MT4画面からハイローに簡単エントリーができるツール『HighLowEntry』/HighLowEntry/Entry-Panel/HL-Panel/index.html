@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>HL-Panel</title>
+
+	<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">-->
+	<style>
+	@import url('./node_modules/bootstrap/dist/css/bootstrap.min.css');
+	@import url('./style.css');
+	</style>
+
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+
+	<!--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+	<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script>
+	require('jquery');
+	require('bootstrap');
+	</script>
+
+</head>
+<body>
+<div class="container-fluid">
+
+<div class="row">
+	<div class="col-12">
+
+		<div class="row my-2">
+			<div class="col-6 text-center border" id="currencyDiv">
+
+				<div class="row mt-2">
+					<div class="col-4 my-col">
+						<button type="button" id="AUDJPY" class="currencyBtn btn btn-sm btn-outline-warning border-dark rounded-0">AUDJPY</button>
+					</div>
+					<div class="col-4 my-col">
+						<button type="button" id="EURGBP" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0 turboOff">EURGBP</button>
+					</div>
+					<div class="col-4 my-col">
+						<button type="button" id="NZDJPY" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0 turboOff">NZDJPY</button>
+					</div>
+				</div>
+
+
+				<div class="row">
+					<div class="col-4 my-col">
+						<button type="button" id="AUDNZD" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0 turboOff">AUDNZD</button>
+					</div>
+					<div class="col-4 my-col">
+						<button type="button" id="EURJPY" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0">EURJPY</button>
+					</div>
+					<div class="col-4 my-col">
+						<button type="button" id="NZDUSD" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0 turboOff">NZDUSD</button>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-4 my-col">
+						<button type="button" id="AUDUSD" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0">AUDUSD</button>
+					</div>
+					<div class="col-4 my-col">
+						<button type="button" id="EURUSD" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0">EURUSD</button>
+					</div>
+
+					<div class="col-4 my-col">
+						<button type="button" id="USDCAD" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0 turboOff">USDCAD</button>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-4 my-col">
+						<button type="button" id="CADJPY" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0 turboOff">CADJPY</button>
+					</div>
+					<div class="col-4 my-col">
+						<button type="button" id="GBPAUD" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0 turboOff">GBPAUD</button>
+					</div>
+					<div class="col-4 my-col">
+						<button type="button" id="USDCHF" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0 turboOff">USDCHF</button>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-4 my-col">
+						<button type="button" id="CHFJPY" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0 turboOff">CHFJPY</button>
+					</div>
+					<div class="col-4 my-col">
+						<button type="button" id="GBPJPY" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0">GBPJPY</button>
+					</div>
+
+					<div class="col-4 my-col">
+						<button type="button" id="USDJPY" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0">USDJPY</button>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-4 my-col">
+						<button type="button" id="EURAUD" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0 turboOff">EURAUD</button>
+					</div>
+					<div class="col-4 my-col">
+						<button type="button" id="GBPUSD" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0 turboOff">GBPUSD</button>
+					</div>
+					<div class="col-4 my-col">
+						<button type="button" id="GOLD" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0 turboOff">GOLD</button>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-4 my-col">
+						<button type="button" id="NZDJPY" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0">NZDJPY</button>
+					</div>
+					<div class="col-4 my-col">
+						<button type="button" id="BTCUSD" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0 turboOff_iflong">BTCUSD</button>
+					</div>
+					<div class="col-4 my-col">
+						<button type="button" id="ETHUSD" class="currencyBtn btn btn-sm btn-outline-warning my-border rounded-0 turboOff_iflong">ETHUSD</button>
+					</div>
+				</div>
+
+			</div><!--/curencyDiv-->
+
+			<div class="col-6 text-center border" id="spanDiv">
+
+				<div class="row mt-2" id="spanDiv-row">
+					<div class="col-6 p-1">
+
+						<div class="row mt-2">
+							<div class="col">
+								<button type="button" id="LabelBtnHighLow" class="btn btn-lg btn-warning text-white" style="width:6em;">HighLow</button>
+							</div>
+						</div>
+
+						<div class="row mt-4">
+							<div class="col-6 my-col-l">
+								<button type="button" id="span15short" class="spanBtn btn btn-sm btn-outline-warning my-border rounded-0">短期</button>
+							</div>
+							<div class="col-6 my-col-r">
+								<button type="button" id="span15middle" class="spanBtn btn btn-sm btn-outline-warning my-border rounded-0">中期</button>
+							</div>
+						</div>
+
+						<div class="row mt-4">
+							<div class="col-6 my-col-l">
+								<button type="button" id="span15long" class="spanBtn btn btn-sm btn-outline-warning my-border rounded-0">長期</button>
+							</div>
+							<div class="col-6 my-col-r">
+								<button type="button" id="span1h" class="spanBtn btn btn-sm btn-outline-warning my-border rounded-0">1時間</button>
+							</div>
+						</div>
+
+					</div>
+					<div class="col-6 p-1 my-dash">
+
+						<div class="row mt-2">
+							<div class="col">
+								<button type="button" id="LabelBtnTurbo" class="btn btn-lg btn-primary" style="width:6em;">Turbo</button>
+							</div>
+						</div>
+
+						<div class="row mt-4">
+							<div class="col-6 my-col-l">
+								<button type="button" id="span30s" class="spanBtn btn btn-sm btn-outline-warning my-border rounded-0">30秒</button>
+							</div>
+							<div class="col-6 my-col-r">
+								<button type="button" id="span1m" class="spanBtn btn btn-sm btn-outline-warning my-border rounded-0">1分</button>
+							</div>
+						</div>
+
+						<div class="row mt-4">
+							<div class="col-6 my-col-l">
+								<button type="button" id="span3m" class="spanBtn btn btn-sm btn-outline-warning my-border rounded-0">3分</button>
+							</div>
+							<div class="col-6 my-col-r">
+								<button type="button" id="span5m" class="spanBtn btn btn-sm btn-outline-warning my-border rounded-0">5分</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div><!--/spanDiv-->
+		</div>
+
+
+		<div class="row my-2 border" id="amountDiv">
+			<div class="col-15 text-center mt-2 mb-2">
+				<div class="row">
+					<div class="col-12 my-col">
+							<button type="button" id="n1000" class="amountBtn btn btn-sm btn-outline-warning my-border rounded-0">1,000円</button>
+					</div>
+				</div>
+				<div class="row mt-1">
+					<div class="col-12 my-col">
+							<button type="button" id="n30000" class="amountBtn btn btn-sm btn-outline-warning my-border rounded-0">30,000円</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-15 text-center mt-2 mb-2">
+				<div class="row">
+					<div class="col-12 my-col">
+							<button type="button" id="n5000" class="amountBtn btn btn-sm btn-outline-warning my-border rounded-0">5,000円</button>
+					</div>
+				</div>
+				<div class="row mt-1">
+					<div class="col-12 my-col">
+							<button type="button" id="n50000" class="amountBtn btn btn-sm btn-outline-warning my-border rounded-0">50,000円</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-15 text-center mt-2 mb-2">
+				<div class="row">
+					<div class="col-12 my-col">
+							<button type="button" id="n10000" class="amountBtn btn btn-sm btn-outline-warning my-border rounded-0">10,000円</button>
+					</div>
+				</div>
+				<div class="row mt-1">
+					<div class="col-12 my-col">
+							<button type="button" id="n100000" class="amountBtn btn btn-sm btn-outline-warning my-border rounded-0">100,000円</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-15 text-center mt-2 mb-2">
+				<div class="row">
+					<div class="col-12 my-col">
+							<button type="button" id="n20000" class="amountBtn btn btn-sm btn-outline-warning my-border rounded-0">20,000円</button>
+					</div>
+				</div>
+				<div class="row mt-1">
+					<div class="col-12 my-col">
+							<button type="button" id="n200000" class="amountBtn btn btn-sm btn-outline-warning my-border rounded-0">200,000円</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-15 text-center mt-2 mb-2">
+				<div class="row mt-2">
+					<div class="col-12 my-col">
+							<button type="button" id="n_manual" class="amountBtn btn btn-sm btn-outline-warning my-border rounded-0">直接入力</button>
+							<div class="form-inline  justify-content-center amountContainer">
+								<input type="text" id="amount" class="form-control form-control-sm my-border rounded-0" value="10000">
+								<label for="amount" class="col-form-label text-left">円</label>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/amountDiv-->
+
+	</div>
+
+	<div class="col-12 my-2 no-padding">
+
+		<div class="row my-2">
+			<div class="col-4 text-center highLowBtnArea">
+					<button type="button" id="highBtn" class="tradeBtn btn btn-lg btn-block rounded-0 btn-info">HIGH</button>
+			</div>
+			<div class="col-4 p-0 text-left">
+				<ul id="logArea" class="list-unstyled small">
+				<li>操作ログエリア</li>
+				</ul>
+			</div>
+			<div class="col-4 text-center highLowBtnArea">
+					<button type="button" id="lowBtn" class="tradeBtn btn btn-lg btn-block  rounded-0 btn-danger">LOW</button>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+
+
+<script>
+const { ipcRenderer } = require("electron")
+ipcRenderer.on('resized', (event, data) => {
+    console.log(data);
+	var zoom1 = parseInt(data.height * 100 /560) / 100;
+	var zoom2 = parseInt(data.width * 100 /530 ) / 100;
+	var zoom = Math.min(zoom1,zoom2);
+	console.log("zoom="+zoom);
+	require("electron").webFrame.setZoomFactor(zoom);
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+	var default_zoom = require("electron").webFrame.getZoomFactor();
+	console.log("default_zoom=" + default_zoom);
+	//window.api.invoke('setWindowSize', {zoom: 1.5});
+});
+
+document.addEventListener("keydown", function (e) {
+
+	if(e.ctrlKey && e.which === 88){  // ctrl+X(88)
+		require('electron').remote.require("./hl-panel").myExit();
+		//var main = require('electron').remote.require("./hl-panel");
+		//main.myExit();
+
+	}else if(e.ctrlKey && e.which === 83){  // ctrl+S(83)
+		require('electron').remote.require("./hl-panel").openSetting();
+		//var main = require('electron').remote.require("./hl-panel");
+		//main.openSetting();
+
+	}else if(e.ctrlKey && e.which === 76){  // ctrl+L(76)
+		require('electron').remote.require("./hl-panel").openLog();
+		//var main = require('electron').remote.require("./hl-panel");
+		//main.openLog();
+
+	}else if (e.which === 123) { // F12
+		require('electron').remote.getCurrentWindow().toggleDevTools();
+
+	} else if (e.which === 116) { // F5
+		location.reload();
+
+	}
+
+
+});
+
+const $ = require('./jquery-3.3.1.min.js');
+
+const sendOrder			= require('electron').remote.require("./hl-panel").sendOrder;
+const getGlobalMsg	= require('electron').remote.require("./hl-panel").getGlobalMsg;
+
+var currency	= "";
+var span			= "";
+var amount		= "";
+var pre_amount= "";
+var action		= "";
+var log_arr		= [];
+
+$(function(){
+
+	var res = getGlobalMsg();
+	if(res){
+		console.log(res);
+		showpop(res.type,res.title,res.msg);
+	}else{
+		//showpop("info","挨拶","こんにちは");
+	}
+
+
+	$('#spanDiv-row').height($('#spanDiv').height());
+
+	$('.currencyBtn').click(function(){
+		if($(this).hasClass('btn-outline-warning')){
+			$('.currencyBtn').removeClass('btn-warning').addClass('btn-outline-warning');
+			$(this).removeClass('btn-outline-warning').addClass('btn-warning');
+			currency = $(this).attr('id');
+			var msg = currency + "選択:" + now_stamp();
+
+			if(!sendOrder('currency',msg, prep_order(), 0)){
+				showpop("error","接続エラー","HL-Server未接続です。hl-server起動もしくは、接続設定で稼働中のhl-serverを指定してください。");
+				return false;
+			}
+			log(msg);
+		}
+	});
+
+	$('.spanBtn').click(function(){
+		if($(this).hasClass('btn-outline-warning')){
+			$('.spanBtn').removeClass('btn-warning').addClass('btn-outline-warning');
+			$(this).removeClass('btn-outline-warning').addClass('btn-warning');
+			span = $(this).attr('id');
+			if(span=="span15short" ||  span=="span15middle"  || span=="span15long" || span=="span1h" || span=="span1d"){
+				$('.turboOff_iflong').prop("disabled", true);							// 2022.01.31 追加
+				$('.turboOff_iflong').addClass('btn-secondary');						// 2022.01.31 追加
+				if($('.turboOff_iflong'+ '.btn-warning').length > 0){					// 2022.01.31 追加
+					$('.turboOff_iflong'+ '.btn-warning').removeClass('btn-warning');	// 2022.01.31 追加
+					currency = "";														// 2022.01.31 追加
+				}																		// 2022.01.31 追加
+				$('.turboOff').prop("disabled", false);
+				$('.turboOff').removeClass('btn-secondary');
+				$('#LabelBtnHighLow').addClass('active').attr('aria-pressed',true);
+				$('#LabelBtnTurbo').removeClass('active');
+				$('#LabelBtnHighLow').focus();
+			}else{
+				$('.turboOff_iflong').prop("disabled", false);							// 2022.01.31 追加
+				$('.turboOff_iflong').removeClass('btn-secondary');						// 2022.01.31 追加
+				$('.turboOff').prop("disabled", true);
+				$('.turboOff').addClass('btn-secondary');
+				if($('.turboOff'+ '.btn-warning').length > 0){
+					$('.turboOff'+ '.btn-warning').removeClass('btn-warning');
+					currency = "";
+				}
+				$('#LabelBtnTurbo').addClass('active').attr('aria-pressed',true);
+				$('#LabelBtnHighLow').removeClass('active');
+				$('#LabelBtnTurbo').focus();
+			}
+			span = span.replace(/span/,"");
+			var msg = span + "選択:" + now_stamp();
+			if(!sendOrder('span',msg, prep_order(), 0)){
+				showpop("error","接続エラー","HL-Server未接続です。hl-server起動もしくは、接続設定で稼働中のhl-serverを指定してください。");
+				return false;
+			}
+			log(msg);
+		}
+	});
+
+	$('#LabelBtnHighLow').click(function(){
+		$('.turboOff').prop("disabled", false);
+		$('.turboOff').removeClass('btn-secondary');
+		$('#LabelBtnHighLow').addClass('active').attr('aria-pressed',true);
+		$('#LabelBtnTurbo').removeClass('active');
+	});
+
+	$('#LabelBtnTurbo').click(function(){
+
+		$('.turboOff').prop("disabled", true);
+		$('.turboOff').addClass('btn-secondary');
+		if($('.turboOff'+ '.btn-warning').length > 0){
+			$('.turboOff'+ '.btn-warning').removeClass('btn-warning');
+			currency = "";
+		}
+		$('#LabelBtnTurbo').addClass('active').attr('aria-pressed',true);
+		$('#LabelBtnHighLow').removeClass('active');
+	});
+
+
+	$('.amountBtn').click(function(){
+		if($(this).hasClass('btn-outline-warning')){
+			$('.amountBtn').removeClass('btn-warning').addClass('btn-outline-warning');
+			$(this).removeClass('btn-outline-warning').addClass('btn-warning');
+			amount = $(this).attr('id');
+
+			if(amount==="n_manual"){
+				amount = $('#amount').val();
+				var msg = amount + "入力:" + now_stamp();
+			}else{
+				amount = amount.replace(/n/,"");
+				var msg = amount + "選択:" + now_stamp();
+			}
+			if(!sendOrder('amount',msg, prep_order(), 0)){
+				showpop("error","接続エラー","HL-Server未接続です。hl-server起動もしくは、接続設定で稼働中のhl-serverを指定してください。");
+				return false;
+			}
+			log(msg);
+		}
+	});
+
+  $('#amount').on('focus',function(){
+		pre_amount = $(this).val();
+	}).on('keypress', function(e) {
+		if(e.which==13) {
+	    let value = $(this).val();
+			if(value.search(/^[-]?[0-9]+$/) !== 0){
+				showpop("error","入力エラー","数値を入力してください。");
+				$(this).val(pre_amount).focus();
+			}else if(parseInt(value) <=0){
+				showpop("error","入力エラー","0円より大きい金額を入力してください。");
+				$(this).val(pre_amount).focus();
+			}else{
+				amount = value;
+		  	if($('#n_manual').hasClass('btn-outline-warning')){
+					$('#n_manual').click().focus();
+				}else{
+					var msg = amount + "選択:" + now_stamp();
+					if(!sendOrder('amount',msg, prep_order(), 0)){
+						showpop("error","接続エラー","HL-Server未接続です。hl-server起動もしくは、接続設定で稼働中のhl-serverを指定してください。");
+						return false;
+					}
+					log(msg);
+				}
+			}
+			return false;
+		}
+	}).on('blur',function(){
+/*
+    let value = $(this).val();
+		if(value.search(/^[-]?[0-9]+$/) !== 0){
+			showpop("error","入力エラー","数値を入力してください。");
+			$(this).val(pre_amount).focus();
+		}else if(parseInt(value) <=0){
+			showpop("error","入力エラー","0円より大きい金額を入力してください。");
+			$(this).val(pre_amount).focus();
+		}else{
+			amount = value;
+		  if($('#n_manual').hasClass('btn-outline-warning')){
+				$('#n_manual').click().focus();
+			}else{
+				var msg = amount + "選択:" + now_stamp();
+				if(!sendOrder('amount',msg, prep_order(), 0)){
+					showpop("error","接続エラー","HL-Server未接続です。hl-server起動もしくは、接続設定で稼働中のhl-serverを指定してください。");
+					return false;
+				}
+				log(msg);
+			}
+		}
+*/
+  });
+
+	$('.tradeBtn').on('click',function(){
+
+		var msg_arr = [];
+
+		if(currency.length <=0)msg_arr.push("・通貨ペアを選択してください。");
+		if(span.length <=0)msg_arr.push("・時間を選択してください。");
+		if(amount.length <=0)msg_arr.push("・金額を選択・入力してください。");
+
+		if(msg_arr.length > 0){
+			var msg = msg_arr.join("\n",msg_arr);
+			showpop("error","入力エラー",msg);
+		}else{
+			trade = $(this).attr("id");
+			if(trade=="highBtn"){
+				action = "high";
+			}else{
+				action = "low";
+			}
+			var msg = trade + "送信:"+now_stamp();
+			if(!sendOrder('action',msg, prep_order(), 0)){
+				showpop("error","接続エラー","HL-Server未接続です。hl-server起動もしくは、接続設定で稼働中のhl-serverを指定してください。");
+				return false;
+			}
+			action = ""; // 送信しおわったら忘れずクリア //
+			log(msg);
+		}
+	});
+
+});
+
+function prep_order(){
+
+	let order = {};
+	order.currency	= currency;
+	order.span			= span;
+	order.amount		= amount;
+	order.action		= action;
+	return order;
+
+}
+
+function log(msg){
+	log_arr.unshift(msg);
+	$('#logArea').prepend('<li>' + msg + '</li>');
+	if(log_arr.length >= 5){
+		log_arr.pop();
+		$('#logArea li:last').remove();
+	}
+}
+
+
+function now_stamp(){
+	var t  = new Date();
+	//return (t.getFullYear()) + "-" + ('0' + (t.getMonth() + 1)).slice(-2) + "-" + ('0' + t.getDate()).slice(-2) + " " + ('0'+t.getHours()).slice(-2) + ":" + ('0'+t.getMinutes()).slice(-2) + ":" + ('0'+ t.getSeconds()).slice(-2);
+
+	return ('0' + (t.getMonth() + 1)).slice(-2) + "/" + ('0' + t.getDate()).slice(-2) + " " + ('0'+t.getHours()).slice(-2) + ":" + ('0'+t.getMinutes()).slice(-2) + ":" + ('0'+ t.getSeconds()).slice(-2);
+
+}
+
+function showpop(type,title,message){
+
+	const dialog	= require('electron').remote.dialog;
+	const win			= require('electron').remote.getCurrentWindow();
+
+	dialog.showMessageBox(win, {
+				title: title,
+        type: type,
+        message: message,
+        buttons: ['OK'],
+    });
+}
+
+</script>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.no-padding{
+  padding: 0!important;
+}
+
+.mx-04 {
+  margin-left:  0.1rem!important;
+  margin-right: 0.1rem!important;
+}
+.my-04 {
+  margin-top:    0.1rem!important;
+  margin-bottom: 0.1rem!important;
+}
+
+.my-col {
+  padding-top:      3px;
+  padding-bottom:   3px;
+  padding-left:     3px!important;
+  padding-right:    3px!important;
+}
+
+.my-col-r {
+  padding-top:      3px;
+  padding-bottom:   3px;
+  padding-left:     1px!important;
+  /* padding-right: 1px!important; */
+}
+.my-col-l {
+  padding-top:      3px;
+  padding-bottom:   3px;
+  /* padding-left:  1px!important; */
+  padding-right:    1px!important;
+}
+
+
+
+.my-border {
+  border: 1px solid #000000!important;
+}
+
+.currencyBtn {
+  width: 6em!important;
+}
+
+.spanBtn {
+  width: 4em!important;
+  font-size:1em!important;
+  margin-left: 0!important;
+  margin-right: 0!important;
+  padding-left: 0!important;
+  padding-right: 0!important;
+}
+
+.amountBtn {
+  width: 6em!important;
+  font-size:1em!important;
+  margin-left: 0!important;
+  margin-right: 0!important;
+  padding-left: 0!important;
+  padding-right: 0!important;
+}
+
+#amount {
+  width: 5em!important;
+  font-size:1em!important;
+  margin-left: 0!important;
+  margin-right: 0!important;
+  padding-left: 0!important;
+  padding-right: 0!important;
+  text-align: center;
+}
+.amountContainer {
+  /* text-align: center; */
+  /* vertical-align: middle; */
+  margin-top: 0!important;
+}
+
+
+
+.my-dash {
+  border-left: dashed 1px #000000;
+}
+
+/* 5 Columns */
+
+.col-15,
+.col-xs-15,
+.col-sm-15,
+.col-md-15,
+.col-lg-15 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.col-15 {
+	width: 20%;
+	float: left;
+}
+
+.col-xs-15 {
+    width: 20%;
+    float: left;
+}
+@media (min-width: 768px) {
+    .col-sm-15 {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 992px) {
+    .col-md-15 {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 1200px) {
+    .col-lg-15 {
+        width: 20%;
+        float: left;
+    }
+}
+
+
+.highLowBtnArea{
+  height : 100px!important;
+}
+
+#highBtn {
+  height : 100px!important;
+  font-size : 3em;
+}
+#lowBtn {
+  height : 100px!important;
+  font-size : 3em;
+}
+
+#logArea li:before {
+  content: '・';
+  display: inline-block;
+  width: 1em;
+  text-indent: 0;
+}
+
+.btn-secondary.disabled, .btn-secondary:disabled {
+    color: #fff!important;
+    background-color: #6c757d!important;
+    border-color: #6c757d!important;
+}
+

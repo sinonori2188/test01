@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<style>
+	@import url('./node_modules/bootstrap/dist/css/bootstrap.min.css');
+	@import url('./style.css');
+	</style>
+
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script>
+	require('jquery');
+	require('bootstrap');
+	</script>
+</head>
+<body>
+
+<div class="container-fluid">
+
+	<div class="row mt-3 mb-3">
+		<div class="col">
+
+	  	<div class="form-group">
+    		<label for="server_url">HL-Serverの待受URL</label>
+   	 		<input type="url" class="form-control rounded-0" id="server_url" placeholder="http://127.0.0.1:5901/">
+    		<small class="text-primary">書式: http://ipアドレス:ポート番号/</small><br />
+    		<small class="text-primary">ローカルPCに立ち上げた場合は http://127.0.0.1:5901/</small>
+  		</div>
+
+			<div class="form-group">
+				<label for="client_urls">HL-Clientランチャーの待受URL(複数)</label>
+				<textarea class="form-control rounded-0" style="height:200px!important;" id="launcher_urls" placeholder="http://127.0.0.1:5689/?cmd=gotomoon&#13;&#10;http://118.27.16.44:5689/?cmd=gotomoon&#13;&#10;"></textarea>
+    		<small class="text-primary">書式: http://ipアドレス:ポート番号/ </small><br />
+    		<small class="text-primary">ローカルPCに立ち上げた場合は http://127.0.0.1:5689/?cmd=gotomoon</small><br />
+    		<small class="text-danger">設置ランチャーごとに1行入力してください。</small><br />
+    		<small class="">ランチャー(launcher.js)はカレントフォルダにあるclient.csvに書かれた設定でHL-Client複数を5秒間隔で起動します。</small><br />
+			</div>
+
+		</div>
+	</div>
+
+	<div class="row mt-3 mb-3">
+		<div class="col-12">
+			<button class="btn btn-primary rounded-0" 			id="save"    type="button">保存する</button>
+			<button class="btn btn-outline-dark rounded-0"	id="close"   type="button">閉じる</button>
+		</div>
+		<div class="col-12 mt-2">
+			<button class="btn btn-info rounded-0"    id="connect"        type="button">HL-Server再接続</button>
+			<button class="btn btn-warning rounded-0" id="call_launchers" type="button">HL-Client全起動</button>
+			<!--<button class="btn btn-danger rounded-0"  id="stop_clients"   type="button">HL-Client全停止</button>-->
+		</div>
+	</div>
+
+
+</div>
+
+<script>
+const $ = require('./jquery-3.3.1.min.js');
+const getGlobalMsg			= require('electron').remote.require("./hl-panel").getGlobalMsg;
+const connect_hl_server			= require('electron').remote.require("./hl-panel").connect_hl_server;
+const disconnect_hl_server	= require('electron').remote.require("./hl-panel").disconnect_hl_server;
+const myReadFileSync		= require('electron').remote.require("./hl-panel").myReadFileSync;
+const myWriteFileSync		= require('electron').remote.require("./hl-panel").myWriteFileSync;
+const closeSub					= require('electron').remote.require("./hl-panel").closeSub;
+const stopAll						= require('electron').remote.require("./hl-panel").stopAll;
+const doGet							= require('electron').remote.require("./lib.common").doGet;
+
+
+let server_url	= "";
+let client_urls = "";
+
+$(function(){
+
+	$('#server_url').val(myReadFileSync("./server_url.txt"));
+	$('#launcher_urls').val(myReadFileSync("./launcher_urls.txt"));
+
+	$('#save').click(function(){
+		mySave();
+	});
+
+	$('#connect').click(function(){
+		myConnect();
+	});
+
+	$('#close').click(function(){
+		closeSub();
+	});
+
+	$('#call_launchers').click(function(){
+
+		let launcher_urls = $('#launcher_urls').val().trim();
+
+		let tmp = launcher_urls.split("\n");
+		if(tmp.length<=0){
+			showpop("error","未設定", "HL-Clientランチャーの待受URLを入力してください。");
+			return false;
+		}
+
+		launchAll(tmp);
+
+	});
+
+	$('#stop_clients').click(function(){
+		if(!stopAll()){
+			let res = getGlobalMsg();
+			if(res){
+				showpop(res.type, res.title, res.msg);
+				return true;
+			}
+		}
+		showpop("none","通知完了","全停止命令を通知しました。");
+	});
+
+
+});
+
+function mySave(){
+
+	(async ()=>{
+
+		let server_url		= $('#server_url').val().trim().replace(/\n/,"");
+		let launcher_urls = $('#launcher_urls').val().trim();
+
+		myWriteFileSync("./server_url.txt",server_url);
+		myWriteFileSync("./launcher_urls.txt",launcher_urls);
+
+		if(server_url.length > 0){
+			try{
+				let ret = await connect_hl_server();
+				showpop("none","操作完了","保存＆再接続しました。");
+			}catch(error){
+				let res = getGlobalMsg();
+				if(res){
+					showpop(res.type, res.title, res.msg);
+					return true;
+				}
+			}
+		}else{
+			disconnect_hl_server();
+			showpop("none","操作完了","保存しました。");
+		}
+
+	})();
+
+}
+
+function myConnect(){
+
+	(async ()=>{
+
+		let server_url		= $('#server_url').val().trim().replace(/\n/,"");
+
+		if(server_url.length<=0){
+			showpop("error","未設定", "HL-Serverの待受URLを入力してください。");
+			return false;
+		}else{
+
+			try{
+				let ret = await connect_hl_server();
+				showpop("none","再接続完了","再接続しました！");
+
+			}catch(error){
+				let res = getGlobalMsg();
+				if(res){
+					showpop(res.type, res.title, res.msg);
+					return true;
+				}
+			}
+		}
+
+
+	})();
+
+}
+
+
+
+function launchAll(tmp){
+
+	(async ()=>{
+
+		let call_log = "";
+
+		for(let i=0;i<tmp.length;i++){
+
+			try {
+
+				let url = tmp[i].trim();
+				let res = await doGet(url);
+
+				console.log("[" + (i+1) + "]" + res);
+
+				if(res.match(/\[ok\]/)){
+					call_log += "[" + (i+1) + "]行目成功:" + res + "\n";
+				}else{
+					call_log += "[" + (i+1) + "]行目エラー:" + res + "\n";
+				}
+
+			}catch(error){
+					console.log(error);
+					call_log += "[" + (i+1) + "]行目エラー:" + error.toString() + "\n";
+			}
+
+		}
+
+		if(call_log.match(/エラー/)){
+			showpop("error","起動失敗", call_log);
+		}else{
+			showpop("none","起動成功", call_log);
+		}
+
+	})();
+}
+
+
+
+function showpop(type,title,message){
+
+	const dialog	= require('electron').remote.dialog;
+	const win			= require('electron').remote.getCurrentWindow();
+
+	dialog.showMessageBox(win, {
+				title: title,
+        type: type,
+        message: message,
+        buttons: ['OK'],
+    });
+}
+
+</script>
+
+
+</body>
+</html>

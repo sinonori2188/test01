@@ -1,0 +1,191 @@
+/*
+Author URI: http://www.af5.jp/
+*/
+html {
+    -webkit-text-size-adjust: none;
+}
+
+.video embed,
+.video object,
+.video iframe {
+    width: 100%;
+    height: auto;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    width: auto \9; /* ie8 */
+}
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+    /* -------------------------------------------- */
+    /* ------------------Header-------------------- */
+    header {
+        height: 100px;
+    }
+
+    header .wrap-header {
+        height: 100px;
+    }
+
+    /* -------------------------------------------- */
+    /* ------------------Content------------------- */
+    /* -------------------------------------------- */
+    /* ------------------Footer-------------------- */
+    /* -------------------------------------------- */
+    /* ------------------Other----------------*---- */
+
+}
+
+@media only screen and (max-width: 767px) {
+    /* -------------------------------------------- */
+    /* ------------------Header-------------------- */
+    header {
+        margin-top: 0;
+        height: 100px;
+    }
+
+    header #logo {
+        top: 60px;
+    }
+
+    nav .wrap-nav {
+        top: 10px;
+        left: 10px;
+        right: auto;
+    }
+
+    /* -------------------------------------------- */
+    /* ------------------Content------------------- */
+    /* -------------------------------------------- */
+    /* ------------------Featured------------------ */
+    /* -------------------------------------------- */
+    /* ------------------Footer-------------------- */
+    /* -------------------------------------------- */
+    /* ------------------Other----------------*---- */
+}
+
+@media only screen and (min-width: 620px) and (max-width: 767px) {
+    /* -------------------------------------------- */
+    /* ------------------Header-------------------- */
+    header {
+        height: 100px;
+    }
+
+    header .wrap-header {
+        height: 100px;
+    }
+
+    /* ------------------Content------------------- */
+    /* -------------------------------------------- */
+    /* -------------------------------------------- */
+    /* ------------------Footer-------------------- */
+    /* -------------------------------------------- */
+    /* ------------------Other----------------*---- */
+}
+
+@media only screen and (min-width: 480px) and (max-width: 619px) {
+    /* -------------------------------------------- */
+    /* ------------------Header-------------------- */
+    header {
+        height: 80px;
+    }
+
+    header .wrap-header {
+        height: 80px;
+    }
+
+    /* -------------------------------------------- */
+    #content {
+        width: auto;
+    }
+
+    #main-content {
+        width: auto;
+    }
+
+    #sidebar {
+        width: auto;
+    }
+
+    /* -------------------------------------------- */
+    /* ------------------Footer-------------------- */
+    /* -------------------------------------------- */
+    /* ------------------Other----------------*---- */
+}
+
+@media only screen and (max-width: 479px) {
+    /* -------------------------------------------- */
+    /* ------------------Header-------------------- */
+    header {
+        height: 50px;
+    }
+
+    header .wrap-header {
+        height: 50px;
+    }
+
+    header #logo {
+        top: 90px;
+    }
+
+    nav .wrap-nav {
+        position: relative;
+        height: 37px;
+        left: 0;
+        top: 0;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .minimenu {
+        display: block;
+    }
+
+
+    /* -------------------------------------------- */
+    /* ------------------Content------------------- */
+    /* -------------------------------------------- */
+    /* ------------------Footer-------------------- */
+    /* -------------------------------------------- */
+    /* ------------------Other----------------*---- */
+}
+
+@media only screen and (max-width: 619px) {
+
+    /**
+    登録フォーム
+     */
+    .well {
+    }
+
+    .dl-horizontal {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+    }
+
+    .dl-horizontal > dt {
+        margin-top: 5px;
+        text-align: left;
+    }
+
+    .dl-horizontal > dt:first-child {
+        margin-top: 0;
+    }
+
+    .dl-horizontal > dd {
+        margin-left: 15px;
+    }
+
+    /*
+       dl.dl-horizontal:before {
+        }*/
+    dl.dl-horizontal:after {
+        clear: both;
+    }
+}

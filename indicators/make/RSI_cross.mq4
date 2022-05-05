@@ -13,7 +13,7 @@ input int RSI_Period2 = 32;  // RSI計算期間_2
 // インジケータプロパティ設定
 #property  indicator_buffers    4            // カスタムインジケータのバッファ数
 
-//矢印
+// 矢印マーク
 #property indicator_width1 3
 #property indicator_color1 Red
 #property indicator_width2 3

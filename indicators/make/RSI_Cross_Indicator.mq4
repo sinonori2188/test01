@@ -1,12 +1,10 @@
 //+------------------------------------------------------------------+
-//|                                                    RSI_cross.mq4 |
+//|                                          RSI_Cross_Indicator.mq4 |
 //|                   Copyright 2005-2014, MetaQuotes Software Corp. |
 //|                                              http://www.mql4.com |
 //+------------------------------------------------------------------+
 #property strict
-
-#property indicator_chart_window             // 指標をメインウインドウに表示する
-//#property indicator_separate_window        // カスタムインジケータをサブウインドウに表示する　※指標は表示されない。
+#property indicator_separate_window          // カスタムインジケータをサブウインドウに表示する　※指標は表示されない。
 
 // 引数
 input int RSI_Period_Short = 14;             // 短期RSI計算期間
@@ -16,14 +14,14 @@ input int RSI_Period_Long  = 32;             // 長期RSI計算期間
 #property  indicator_buffers 4               // カスタムインジケータのバッファ数
 
 // 矢印マーク
-#property indicator_width1     5             // 太さ
-#property indicator_color1     Blue          // 色
-#property indicator_style1     STYLE_SOLID   // 描画スタイル
-#property indicator_type1      DRAW_ARROW    // 描画タイプ
-#property indicator_width2     5             // 太さ
-#property indicator_color2     Red           // 色
-#property indicator_style2     STYLE_SOLID   // 描画スタイル
-#property indicator_type2      DRAW_ARROW    // 描画タイプ
+#property indicator_width1     5             // 上矢印の太さ
+#property indicator_color1     Blue          // 上矢印の色
+#property indicator_style1     STYLE_SOLID   // 上矢印の描画スタイル
+#property indicator_type1      DRAW_ARROW    // 上矢印の描画タイプ
+#property indicator_width2     5             // 下矢印の太さ
+#property indicator_color2     Red           // 下矢印の色
+#property indicator_style2     STYLE_SOLID   // 下矢印の描画スタイル
+#property indicator_type2      DRAW_ARROW    // 下矢印の描画タイプ
 // RSIインジゲーター
 #property indicator_color3     clrRed        // 短期RSIインジケータの色
 #property indicator_type3      DRAW_LINE     // 短期RSIインジケータの描画タイプ
@@ -41,19 +39,18 @@ input int RSI_Period_Long  = 32;             // 長期RSI計算期間
 #property indicator_levelstyle STYLE_DOT     // レベルラインの種類
 #property indicator_levelwidth 1             // レベルラインの太さ
 
-
 // インジケータ表示用動的配列
-double Arrow_Buffer_Up[];    // 上矢印インジケータ表示用動的配列
-double Arrow_Buffer_Down[];  // 下矢印インジケータ表示用動的配列
-double RSI_Buffer_Short[];   // 短期RSIインジケータ表示用動的配列
-double RSI_Buffer_Long[];    // 長期RSIインジケータ表示用動的配列
+double Arrow_Buffer_Up[];                    // 上矢印インジケータ表示用動的配列
+double Arrow_Buffer_Down[];                  // 下矢印インジケータ表示用動的配列
+double RSI_Buffer_Short[];                   // 短期RSIインジケータ表示用動的配列
+double RSI_Buffer_Long[];                     // 長期RSIインジケータ表示用動的配列
 
 //+------------------------------------------------------------------+
 //| OnInit(初期化)イベント
 //+------------------------------------------------------------------+
 int OnInit()
 {
-   // インジゲータースタイルの設定
+   // インジゲーターをバインド
    SetIndexBuffer( 0, Arrow_Buffer_Up );   // 上矢印インジケータ表示用動的配列をインジケータ1にバインドする
    SetIndexArrow( 0, SYMBOL_ARROWUP);      // 上矢印(241)
    SetIndexBuffer( 1, Arrow_Buffer_Down ); // 下矢印インジケータ表示用動的配列をインジケータ2にバインドする
@@ -86,8 +83,8 @@ int OnCalculate(const int      rates_total,      // 入力された時系列の�
                 const long     &volume[],        // Real出来高
                 const int      &spread[])        // スプレッド
 {
-   int limit = Bars - prev_calculated-1;       // バー数取得(未計算分)
-
+   //ループ処理
+   int limit = Bars - prev_calculated - 1;       // バー数取得(未計算分)
    for( int icount = limit ; icount >=0; icount-- ) {
 
       // 短期RSIテクニカルインジケータ算出
@@ -120,14 +117,16 @@ int OnCalculate(const int      rates_total,      // 入力された時系列の�
                                );
 
       //----- 短期RSIと長期RSIがクロスした時に矢印を出す -----//
-      //ゴールデンクロスした時は上矢印を表示する
+      //ゴールデンクロスした時は上矢印を表示
       if(RSI_Short1 < RSI_Long1 && RSI_Short0 >= RSI_Long0){
-         Arrow_Buffer_Up[icount] = iLow(NULL,PERIOD_CURRENT,icount)-20*Point;
+         Arrow_Buffer_Up[icount] = RSI_Short0 - 10;
       }
-      //デッドクロスした時は下矢印を表示する
+      //デッドクロスした時は下矢印を表示
       if(RSI_Short1 > RSI_Long1 && RSI_Short0 <= RSI_Long0){
-         Arrow_Buffer_Down[icount] = iHigh(NULL,PERIOD_CURRENT,icount)+20*Point;
+         Arrow_Buffer_Down[icount] = RSI_Long0 + 10;
       }
    }
+
    return( rates_total ); // 戻り値設定：次回OnCalculate関数が呼ばれた時のprev_calculatedの値に渡される
+
 }

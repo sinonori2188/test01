@@ -43,7 +43,7 @@ input int RSI_Period_Long  = 32;             // 長期RSI計算期間
 double Arrow_Buffer_Up[];                    // 上矢印インジケータ表示用動的配列
 double Arrow_Buffer_Down[];                  // 下矢印インジケータ表示用動的配列
 double RSI_Buffer_Short[];                   // 短期RSIインジケータ表示用動的配列
-double RSI_Buffer_Long[];                     // 長期RSIインジケータ表示用動的配列
+double RSI_Buffer_Long[];                    // 長期RSIインジケータ表示用動的配列
 
 //+------------------------------------------------------------------+
 //| OnInit(初期化)イベント

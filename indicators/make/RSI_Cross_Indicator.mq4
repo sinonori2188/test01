@@ -50,7 +50,7 @@ double RSI_Buffer_Long[];                    // 長期RSIインジケータ表�
 //+------------------------------------------------------------------+
 int OnInit()
 {
-   // インジゲーターをバインド
+   //インジゲーターをバインド
    SetIndexBuffer( 0, Arrow_Buffer_Up );   // 上矢印インジケータ表示用動的配列をインジケータ1にバインドする
    SetIndexArrow( 0, SYMBOL_ARROWUP);      // 上矢印(241)
    SetIndexBuffer( 1, Arrow_Buffer_Down ); // 下矢印インジケータ表示用動的配列をインジケータ2にバインドする

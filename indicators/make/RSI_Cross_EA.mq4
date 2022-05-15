@@ -26,6 +26,8 @@ input int RSI_Period_Long  = 32;             // 長期RSI計算期間
 // インジケータ表示用動的配列
 double Arrow_Buffer_Up[];                    // 上矢印インジケータ表示用動的配列
 double Arrow_Buffer_Down[];                  // 下矢印インジケータ表示用動的配列
+double RSI_Buffer_Short[];                   // 短期RSIインジケータ表示用動的配列
+double RSI_Buffer_Long[];                    // 長期RSIインジケータ表示用動的配列
 
 //+------------------------------------------------------------------+
 //| OnInit(初期化)イベント
@@ -41,6 +43,8 @@ int OnInit()
    //指標ラベルの設定
    SetIndexLabel(0,"Arrow_Buffer_Up");
    SetIndexLabel(1,"Arrow_Buffer_Down");
+   SetIndexLabel(2,"RSI_Buffer_Short("+RSI_Period_Short+")");
+   SetIndexLabel(3,"RSI_Buffer_Long("+RSI_Period_Long+")");
 
    //戻り値
    return( INIT_SUCCEEDED );               // 戻り値：初期化成功
@@ -71,7 +75,7 @@ int OnCalculate(const int      rates_total,      // 入力された時系列の�
                                 RSI_Period_Short, // 計算期間
                                 PRICE_CLOSE,      // 適用価格
                                 icount            // シフト
-                                );
+      RSI_Buffer_Short[icount] = RSI_Short0;      // インジケータに算出結果を設定
       double  RSI_Short1 = iRSI(NULL,             // 通貨ペア
                                 PERIOD_CURRENT,   // 時間軸(現在チャートの時間軸:0)
                                 RSI_Period_Short, // 計算期間
@@ -85,6 +89,7 @@ int OnCalculate(const int      rates_total,      // 入力された時系列の�
                                PRICE_CLOSE,       // 適用価格
                                icount             // シフト
                                );
+      RSI_Buffer_Long[icount] = RSI_Long0;        // インジケータに算出結果を設定
       double  RSI_Long1 = iRSI(NULL,              // 通貨ペア
                                PERIOD_CURRENT,    // 時間軸(現在チャートの時間軸:0)
                                RSI_Period_Long,   // 計算期間

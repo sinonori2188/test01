@@ -9,6 +9,11 @@
 // 引数
 input int RSI_Period_Short = 14;             // 短期RSI計算期間
 input int RSI_Period_Long  = 32;             // 長期RSI計算期間
+extern int Lots = 0.1;                       // Lots
+extern int Slippage = 3;                     // slippage
+
+// マジックナンバー
+#define MAGIC 20220522
 
 // インジケータプロパティ設定
 #property  indicator_buffers 4               // カスタムインジケータのバッファ数
@@ -29,6 +34,7 @@ double Arrow_Buffer_Down[];                  // 下矢印インジケータ表�
 double RSI_Buffer_Short[];                   // 短期RSIインジケータ表示用動的配列
 double RSI_Buffer_Long[];                    // 長期RSIインジケータ表示用動的配列
 
+
 //+------------------------------------------------------------------+
 //| OnInit(初期化)イベント
 //+------------------------------------------------------------------+
@@ -39,6 +45,8 @@ int OnInit()
    SetIndexArrow( 0, SYMBOL_ARROWUP);      // 上矢印(241)
    SetIndexBuffer( 1, Arrow_Buffer_Down ); // 下矢印インジケータ表示用動的配列をインジケータ2にバインドする
    SetIndexArrow( 1, SYMBOL_ARROWDOWN);    // 下矢印(242)
+   SetIndexBuffer( 2, RSI_Buffer_Short );  // 短期RSIインジケータ表示用動的配列をインジケータ3にバインドする
+   SetIndexBuffer( 3, RSI_Buffer_Long );   // 長期RSIインジケータ表示用動的配列をインジケータ4にバインドする
 
    //指標ラベルの設定
    SetIndexLabel(0,"Arrow_Buffer_Up");
@@ -48,6 +56,7 @@ int OnInit()
 
    //戻り値
    return( INIT_SUCCEEDED );               // 戻り値：初期化成功
+
 }
 
 //+------------------------------------------------------------------+
@@ -75,6 +84,7 @@ int OnCalculate(const int      rates_total,      // 入力された時系列の�
                                 RSI_Period_Short, // 計算期間
                                 PRICE_CLOSE,      // 適用価格
                                 icount            // シフト
+                                );
       RSI_Buffer_Short[icount] = RSI_Short0;      // インジケータに算出結果を設定
       double  RSI_Short1 = iRSI(NULL,             // 通貨ペア
                                 PERIOD_CURRENT,   // 時間軸(現在チャートの時間軸:0)
@@ -96,16 +106,51 @@ int OnCalculate(const int      rates_total,      // 入力された時系列の�
                                PRICE_CLOSE,       // 適用価格
                                icount+1           // シフト
                                );
-
-      //----- 短期RSIと長期RSIがクロスした時に矢印を出す -----//
-      //ゴールデンクロスした時は上矢印を表示
-      if(RSI_Short1 < RSI_Long1 && RSI_Short0 >= RSI_Long0){
-         Arrow_Buffer_Up[icount] = iLow(NULL,PERIOD_CURRENT,icount)-20*Point;
-      }
-      //デッドクロスした時は下矢印を表示
-      if(RSI_Short1 > RSI_Long1 && RSI_Short0 <= RSI_Long0){
-         Arrow_Buffer_Down[icount] = iHigh(NULL,PERIOD_CURRENT,icount)+20*Point;
+ 
+      //バーの始値でトレード可能かチェック
+      if(Volume[0]>1 || IsTradeAllowed()==false) {
+            continue;
+      }else{
+         //----- 短期RSIと長期RSIがクロスした時に矢印を出す -----//
+         //ゴールデンクロスした時は
+         if(RSI_Short1 < RSI_Long1 && RSI_Short0 >= RSI_Long0){
+            //上矢印を表示
+            Arrow_Buffer_Up[icount] = iLow(NULL,PERIOD_CURRENT,icount)-20*Point;
+            //決済と建玉
+            ClosePositions();
+            OrderSend(Symbol(),OP_BUY,Lots,Ask,Slippage,0,0,"",MAGIC,0,Blue);
+         }
+         //デッドクロスした時は
+         if(RSI_Short1 > RSI_Long1 && RSI_Short0 <= RSI_Long0){
+            //下矢印を表示
+            Arrow_Buffer_Down[icount] = iHigh(NULL,PERIOD_CURRENT,icount)+20*Point;
+            //決済と建玉
+            ClosePositions();
+            OrderSend(Symbol(),OP_SELL,Lots,Bid,Slippage,0,0,"",MAGIC,0,Red);
+         }
       }
    }
    return( rates_total ); // 戻り値設定：次回OnCalculate関数が呼ばれた時のprev_calculatedの値に渡される
+}
+
+//+------------------------------------------------------------------+
+//| ポジションを決済する                                                |
+//+------------------------------------------------------------------+
+void ClosePositions()
+{
+   for(int i=0; i<OrdersTotal(); i++)
+   {
+      if(OrderSelect(i,SELECT_BY_POS,MODE_TRADES) == false) break;
+      //オーダータイプのチェック
+      if(OrderType()==OP_BUY)
+      {
+         OrderClose(OrderTicket(),OrderLots(),Bid,Slippage,White);
+         break;
+      }
+      if(OrderType()==OP_SELL)
+      {
+         OrderClose(OrderTicket(),OrderLots(),Ask,Slippage,White);
+         break;
+      }
+   }
 }

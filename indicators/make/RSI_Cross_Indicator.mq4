@@ -22,6 +22,7 @@ input int RSI_Period_Long  = 32;             // 長期RSI計算期間
 #property indicator_color2     Red           // 下矢印の色
 #property indicator_style2     STYLE_SOLID   // 下矢印の描画スタイル
 #property indicator_type2      DRAW_ARROW    // 下矢印の描画タイプ
+
 // RSIインジゲーター
 #property indicator_color3     clrRed        // 短期RSIインジケータの色
 #property indicator_type3      DRAW_LINE     // 短期RSIインジケータの描画タイプ

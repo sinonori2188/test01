@@ -32,7 +32,7 @@ void OnDeinit(const int reason)
 void OnTick()
 {
     Bar[1] = Bar[0];
-    Bar[0] = iBars(NULL,PERIOD_CURRENT);
+    Bar[0] = Bars(NULL,PERIOD_CURRENT);
     if (Bar[0] != Bar[1])
     {
         // エントリー条件：ポジションが無く、陽線が３本続いたらエントリ。
